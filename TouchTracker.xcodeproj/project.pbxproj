@@ -19,6 +19,9 @@
 		90AD91E41A801F20009E0D46 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90AD91CC1A801F20009E0D46 /* UIKit.framework */; };
 		90AD91EC1A801F20009E0D46 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90AD91EA1A801F20009E0D46 /* InfoPlist.strings */; };
 		90AD91EE1A801F20009E0D46 /* TouchTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AD91ED1A801F20009E0D46 /* TouchTrackerTests.m */; };
+		90AD91F91A801FFA009E0D46 /* JKLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AD91F81A801FFA009E0D46 /* JKLine.m */; };
+		90AD91FC1A802023009E0D46 /* JKDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AD91FB1A802023009E0D46 /* JKDrawView.m */; };
+		90AD91FF1A80204B009E0D46 /* JKDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90AD91FE1A80204B009E0D46 /* JKDrawViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		90AD91E91A801F20009E0D46 /* TouchTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TouchTrackerTests-Info.plist"; sourceTree = "<group>"; };
 		90AD91EB1A801F20009E0D46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90AD91ED1A801F20009E0D46 /* TouchTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchTrackerTests.m; sourceTree = "<group>"; };
+		90AD91F71A801FFA009E0D46 /* JKLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKLine.h; sourceTree = "<group>"; };
+		90AD91F81A801FFA009E0D46 /* JKLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKLine.m; sourceTree = "<group>"; };
+		90AD91FA1A802023009E0D46 /* JKDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDrawView.h; sourceTree = "<group>"; };
+		90AD91FB1A802023009E0D46 /* JKDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDrawView.m; sourceTree = "<group>"; };
+		90AD91FD1A80204B009E0D46 /* JKDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDrawViewController.h; sourceTree = "<group>"; };
+		90AD91FE1A80204B009E0D46 /* JKDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDrawViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +118,12 @@
 			children = (
 				90AD91D71A801F20009E0D46 /* JKAppDelegate.h */,
 				90AD91D81A801F20009E0D46 /* JKAppDelegate.m */,
+				90AD91F71A801FFA009E0D46 /* JKLine.h */,
+				90AD91F81A801FFA009E0D46 /* JKLine.m */,
+				90AD91FA1A802023009E0D46 /* JKDrawView.h */,
+				90AD91FB1A802023009E0D46 /* JKDrawView.m */,
+				90AD91FD1A80204B009E0D46 /* JKDrawViewController.h */,
+				90AD91FE1A80204B009E0D46 /* JKDrawViewController.m */,
 				90AD91DA1A801F20009E0D46 /* Images.xcassets */,
 				90AD91CF1A801F20009E0D46 /* Supporting Files */,
 			);
@@ -241,7 +256,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				90AD91D51A801F20009E0D46 /* main.m in Sources */,
+				90AD91FC1A802023009E0D46 /* JKDrawView.m in Sources */,
 				90AD91D91A801F20009E0D46 /* JKAppDelegate.m in Sources */,
+				90AD91FF1A80204B009E0D46 /* JKDrawViewController.m in Sources */,
+				90AD91F91A801FFA009E0D46 /* JKLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
