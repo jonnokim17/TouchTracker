@@ -29,9 +29,25 @@
         self.finishedLines = [@[] mutableCopy];
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
+
+        UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(doubleTap:)];
+        doubleTapGesture.numberOfTapsRequired = 2;
+        doubleTapGesture.delaysTouchesBegan = YES;
+        [self addGestureRecognizer:doubleTapGesture];
     }
 
     return self;
+}
+
+- (void)doubleTap:(UIGestureRecognizer *)gr
+{
+    NSLog(@"Double tapped!");
+
+    [self.linesInProgress removeAllObjects];
+    [self.finishedLines removeAllObjects];
+
+    [self setNeedsDisplay];
 }
 
 - (void)strokeLine:(JKLine *)line
