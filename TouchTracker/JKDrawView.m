@@ -9,13 +9,15 @@
 #import "JKDrawView.h"
 #import "JKLine.h"
 
-@interface JKDrawView()
+@interface JKDrawView() <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 
 // selectedLine property will be set to nil if the line is removed from finishedLines by clearing the screen
 @property (nonatomic, weak) JKLine *selectedLine;
+
+@property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
 
 @end
 
@@ -46,11 +48,48 @@
         [self addGestureRecognizer:tapRecognizer];
 
         UILongPressGestureRecognizer *pressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                      action:@selector(longPress:)];
+                                                                                                    action:@selector(longPress:)];
         [self addGestureRecognizer:pressRecognizer];
+
+        self.moveRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                      action:@selector(moveLine:)];
+        self.moveRecognizer.delegate = self;
+        self.moveRecognizer.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:self.moveRecognizer];
     }
 
     return self;
+}
+
+- (void)moveLine:(UIPanGestureRecognizer *)gr
+{
+    // If we have not selected a line, we do not do anything here
+    if (!self.selectedLine)
+    {
+        return;
+    }
+
+    // When the pan recognizer changes its position...
+    if (gr.state == UIGestureRecognizerStateChanged)
+    {
+        // How far has the pan moved?
+        CGPoint translation = [gr translationInView:self];
+
+        // Add the translation to the current beginning and end points of the line
+        CGPoint begin = self.selectedLine.begin;
+        CGPoint end = self.selectedLine.end;
+        begin.x += translation.x;
+        begin.y += translation.y;
+        end.x += translation.x;
+        end.y += translation.y;
+
+        // Set the new beginning and end points of the line
+        self.selectedLine.begin = begin;
+        self.selectedLine.end = end;
+
+        // Redraw the screen
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)doubleTap:(UIGestureRecognizer *)gr
@@ -242,6 +281,16 @@
 -(BOOL)canBecomeFirstResponder
 {
     return YES;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if (gestureRecognizer == self.moveRecognizer)
+    {
+        return YES;
+    }
+
+    return NO;
 }
 
 @end
