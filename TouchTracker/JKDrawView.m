@@ -11,7 +11,6 @@
 
 @interface JKDrawView()
 
-//@property (nonatomic, strong) JKLine *currentLine;
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 
@@ -26,6 +25,8 @@
     if (self)
     {
         self.linesInProgress = [[NSMutableDictionary alloc] init];
+
+        self.finishedLines = [@[] mutableCopy];
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
     }
@@ -62,13 +63,9 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // NSLog to see the order of events
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
     for (UITouch *t in touches)
     {
         CGPoint location = [t locationInView:self];
-
         JKLine *line = [[JKLine alloc] init];
         line.begin = location;
         line.end = location;
@@ -82,14 +79,10 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // NSLog to see the order of events
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
     for (UITouch *t in touches)
     {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         JKLine *line = self.linesInProgress[key];
-
         line.end = [t locationInView:self];
     }
 
@@ -98,9 +91,6 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // NSLog to see the order of events
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
     for (UITouch *t in touches)
     {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
