@@ -44,6 +44,10 @@
         tapRecognizer.delaysTouchesBegan = YES;
         [tapRecognizer requireGestureRecognizerToFail:doubleTapGesture];
         [self addGestureRecognizer:tapRecognizer];
+
+        UILongPressGestureRecognizer *pressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                      action:@selector(longPress:)];
+        [self addGestureRecognizer:pressRecognizer];
     }
 
     return self;
@@ -100,6 +104,26 @@
     [self.finishedLines removeObject:self.selectedLine];
 
     // Redraw everything
+    [self setNeedsDisplay];
+}
+
+- (void)longPress:(UIGestureRecognizer *)gr
+{
+    if (gr.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint point = [gr locationInView:self];
+        self.selectedLine = [self lineAtPoint:point];
+
+        if (self.selectedLine)
+        {
+            [self.linesInProgress removeAllObjects];
+        }
+    }
+    else if (gr.state == UIGestureRecognizerStateEnded)
+    {
+        self.selectedLine = nil;
+    }
+
     [self setNeedsDisplay];
 }
 
